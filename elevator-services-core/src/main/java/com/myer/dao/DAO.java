@@ -1,5 +1,6 @@
 package com.myer.dao;
 
+import com.google.gson.Gson;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
@@ -17,6 +18,8 @@ public class DAO {
 
     private static final String TEST_DB = "elevator-test";
 
+    private Gson gson = new Gson();
+
     public DBCollection getCollection(DB_INSTANCE dbInstance, String collectionName) throws UnknownHostException {
         ConnectionManager mgr = ConnectionManager.getInstance();
         Mongo mongo = mgr.getMongo(null);
@@ -30,6 +33,10 @@ public class DAO {
                 break;
         }
         return db.getCollection(collectionName);
+    }
+
+    public Gson getGson() {
+        return gson;
     }
 
 }
