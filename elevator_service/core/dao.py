@@ -29,6 +29,16 @@ class DAO:
         collection = db[collection_name]
         return collection.find_one({'_id': ObjectId(item_id)})
 
+    def get_by_session_and_time(self, collection_name, session, time):
+        out = []
+        db = self.client[self.db]
+        collection = db[collection_name]
+        time = int(time)
+        items = collection.find({'session': session, 'time': time})
+        for item in items:
+            out.append(item)
+        return out
+
     def create(self, collection_name, item):
         db = self.client[self.db]
         collection = db[collection_name]
