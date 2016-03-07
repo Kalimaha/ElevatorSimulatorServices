@@ -1,9 +1,0 @@
-language: java
-
-services:
-  - mongodb
-
-script: "mvn test"
-
-after_success:
-  - mvn clean cobertura:cobertura coveralls:report
