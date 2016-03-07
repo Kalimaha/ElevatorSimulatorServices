@@ -2,15 +2,24 @@ package com.myer.beans;
 
 import junit.framework.TestCase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author <a href="mailto:guido.barbaglia@gmail.com">Guido Barbaglia</a>
  */
 public class TestElevator extends TestCase {
 
-    public Elevator e;
+    private Elevator e;
 
     public void setUp() {
         e = new Elevator();
+    }
+
+    public void testDefaultValues() {
+        assertNotNull(e.getStops());
+        assertEquals(e.getFloor(), 1);
+        assertEquals(e.getDirection(), "stationary");
     }
 
     public void testId() {
@@ -44,12 +53,17 @@ public class TestElevator extends TestCase {
     }
 
     public void testStops() {
-        e.setStops(new int[]{1, 5, 6, 9});
-        assertEquals(4, e.getStops().length);
-        assertEquals(1, e.getStops()[0]);
-        assertEquals(5, e.getStops()[1]);
-        assertEquals(6, e.getStops()[2]);
-        assertEquals(9, e.getStops()[3]);
+        List<Integer> stops = new ArrayList<>();
+        stops.add(1);
+        stops.add(5);
+        stops.add(6);
+        stops.add(9);
+        e.setStops(stops);
+        assertEquals(4, e.getStops().size());
+        assertEquals(1, e.getStops().get(0).intValue());
+        assertEquals(5, e.getStops().get(1).intValue());
+        assertEquals(6, e.getStops().get(2).intValue());
+        assertEquals(9, e.getStops().get(3).intValue());
     }
 
 }

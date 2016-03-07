@@ -16,19 +16,20 @@ import java.util.Set;
  */
 public class ElevatorDAO extends DAO {
 
-    public void saveElevator(DB_INSTANCE dbInstance, Elevator e) throws UnknownHostException {
+    public WriteResult insert(DB_INSTANCE dbInstance, Elevator e) throws UnknownHostException {
         DBCollection dbCollection = getCollection(dbInstance, "elevators");
-        String json = this.getGson().toJson(e);
-        System.out.println(json);
+        BasicDBObject dbObj = (BasicDBObject)JSON.parse(this.getGson().toJson(e));
+        return dbCollection.insert(dbObj);
     }
 
     public List<Elevator> findElevators(DB_INSTANCE dbInstance) throws UnknownHostException {
         List<Elevator> elevators = new ArrayList<>();
-        ConnectionManager mgr = ConnectionManager.getInstance();
         DBCollection dbCollection = getCollection(dbInstance, "elevators");
         DBCursor cursor = dbCollection.find();
         while (cursor.hasNext()) {
-            System.out.println(cursor.next().toString());
+            String next = cursor.next().toString();
+            Elevator e = this.getGson().fromJson(next, Elevator.class);
+            elevators.add(e);
         }
         return elevators;
     }

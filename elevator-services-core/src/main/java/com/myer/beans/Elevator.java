@@ -1,5 +1,8 @@
 package com.myer.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author <a href="mailto:guido.barbaglia@gmail.com">Guido Barbaglia</a>
  */
@@ -17,7 +20,13 @@ public class Elevator {
 
     private String session;
 
-    private int[] stops;
+    private List<Integer> stops;
+
+    public Elevator() {
+        this.setStops(new ArrayList<Integer>());
+        this.setFloor(1);
+        this.setDirection("stationary");
+    }
 
     public String getId() {
         return id;
@@ -67,12 +76,25 @@ public class Elevator {
         this.session = session;
     }
 
-    public int[] getStops() {
+    public List<Integer> getStops() {
         return stops;
     }
 
-    public void setStops(int[] stops) {
+    public void setStops(List<Integer> stops) {
         this.stops = stops;
+    }
+
+    @Override
+    public String toString() {
+        return "Elevator{" +
+                "id='" + id + '\'' +
+                ", people=" + people +
+                ", floor=" + floor +
+                ", direction='" + direction + '\'' +
+                ", iteration=" + iteration +
+                ", session='" + session + '\'' +
+                ", stops=" + stops +
+                '}';
     }
 
 }
