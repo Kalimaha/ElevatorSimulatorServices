@@ -38,10 +38,12 @@ class BooksTest(unittest.TestCase):
         self.assertEquals(len(data), 1)
 
     def test_create(self):
-        payload = json.dumps(elevator_1)
-        print payload
-        response = self.tester.post('/elevators/test/', data=payload, content_type='application/json')
-        self.assertEquals(response.status_code, 200)
-        dao = get_dao('test')
-        items = dao.get('elevators')
-        self.assertEqual(len(items), 1)
+        try:
+            payload = json.dumps(elevator_1)
+            response = self.tester.post('/elevators/test/', data=payload, content_type='application/json')
+            self.assertEquals(response.status_code, 200)
+            dao = get_dao('test')
+            items = dao.get('elevators')
+            self.assertEqual(len(items), 1)
+        except Exception, e:
+            print e
