@@ -47,7 +47,8 @@ class DAO:
             print item['id']
             print item['session']
             print item['time']
-            return collection.update_one({'id': item['id'], 'session': item['session'], 'time': item['time']}, {'$set': item}, upsert=True)
+            collection.update_one({'id': item['id'], 'session': item['session'], 'time': item['time']}, {'$set': item}, upsert=True)
+            return True
         except Exception, e:
             print e
 
