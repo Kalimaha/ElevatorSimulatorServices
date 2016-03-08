@@ -54,6 +54,8 @@ def get_by_session_and_time(environment, session, time):
 @cross_origin(origins='*', headers=['Content-Type'])
 def create(environment):
     print environment
+    print request
+    print request.data
     item = json.loads(request.data)
     print item
     dao = get_dao(environment)
