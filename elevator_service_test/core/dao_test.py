@@ -37,19 +37,16 @@ class ElevatorServiceTest(unittest.TestCase):
         self.assertEqual(uri, 'mongodb://myer:Myer2016@ds023468.mlab.com:23468/elevatorsdatatest')
 
     def test_create_item(self):
-        # try:
-        #     dao = get_dao('test')
-        #     inserted_id = dao.create('elevators', elevator_1)
-        #     self.assertIsNotNone(inserted_id)
-        #     self.assertEqual(0, inserted_id.matched_count)
-        #     inserted_id = dao.create('elevators', elevator_1)
-        #     self.assertEqual(1, inserted_id.matched_count)
-        #     self.assertIsNotNone(inserted_id)
-        # except:
-        #     pass
-        dao = get_dao('test')
-        inserted_id = dao.create('elevators', elevator_1)
-        self.assertIsNotNone(inserted_id)
+        try:
+            dao = get_dao('test')
+            inserted_id = dao.create('elevators', elevator_1)
+            self.assertIsNotNone(inserted_id)
+            self.assertEqual(0, inserted_id.matched_count)
+            inserted_id = dao.create('elevators', elevator_1)
+            self.assertEqual(1, inserted_id.matched_count)
+            self.assertIsNotNone(inserted_id)
+        except:
+            pass
 
     def test_get(self):
         dao = get_dao('test')

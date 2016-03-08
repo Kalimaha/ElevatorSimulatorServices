@@ -34,16 +34,13 @@ class DAO:
         return out
 
     def create(self, collection_name, item):
-        # try:
-        #     db = self.client[self.db]
-        #     collection = db[collection_name]
-        #     collection.update_one({'id': item['id'], 'session': item['session'], 'time': item['time']}, {'$set': item}, upsert=True)
-        #     return True
-        # except Exception, e:
-        #     print e
-        db = self.client[self.db]
-        collection = db[collection_name]
-        return collection.insert_one(item)
+        try:
+            db = self.client[self.db]
+            collection = db[collection_name]
+            collection.update_one({'id': item['id'], 'session': item['session'], 'time': item['time']}, {'$set': item}, upsert=True)
+            return True
+        except Exception, e:
+            print e
 
     def create_connection_uri(self):
         return 'mongodb://' + self.username + ':' + self.password + '@' + self.host + ':' + self.port + '/' + self.db
