@@ -3,6 +3,7 @@ from flask import Response
 from flask import request
 from flask import Blueprint
 from bson import json_util
+from flask.ext.cors import CORS
 from flask.ext.cors import cross_origin
 from elevator_service.core.dao import get_dao
 
