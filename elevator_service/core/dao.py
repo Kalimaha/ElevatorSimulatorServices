@@ -16,6 +16,11 @@ class DAO:
         self.client = MongoClient(self.uri)
 
     def get(self, collection_name):
+        """
+        Fetch all the documents in the collection.
+        :param collection_name: Name of the collection
+        :return: Collection's documents
+        """
         out = []
         db = self.client[self.db]
         collection = db[collection_name]
@@ -25,6 +30,13 @@ class DAO:
         return out
 
     def get_by_session_and_id(self, collection_name, session, id):
+        """
+        Fetch all the documents matching the given session id and elevator id.
+        :param collection_name: Name of the collection
+        :param session: ID of the session
+        :param id: ID of the elevator
+        :return: Documents matching the conditions
+        """
         out = []
         db = self.client[self.db]
         collection = db[collection_name]
@@ -34,6 +46,12 @@ class DAO:
         return out
 
     def create(self, collection_name, item):
+        """
+        Update a document or create a new one if it is not already present in the DB.
+        :param collection_name: Name of the collection
+        :param item: The item that must be updated or created
+        :return: Result of the update operation
+        """
         try:
             db = self.client[self.db]
             collection = db[collection_name]
@@ -43,6 +61,10 @@ class DAO:
             print e
 
     def create_connection_uri(self):
+        """
+        Create the connection URI for MongoDB
+        :return: Connection URI for MongoDB
+        """
         return 'mongodb://' + self.username + ':' + self.password + '@' + self.host + ':' + self.port + '/' + self.db
 
     def drop_collection(self, collection_name):
@@ -51,6 +73,11 @@ class DAO:
 
 
 def get_dao(environment):
+    """
+    Configure this object according to the environment
+    :param environment: 'test' or 'production'
+    :return: The DAO
+    """
     if 'production' in environment:
         return DAO(p['username'], p['password'], p['host'], p['port'], p['db_name'])
     elif 'test' in environment:
