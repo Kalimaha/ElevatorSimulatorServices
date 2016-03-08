@@ -19,35 +19,12 @@ def get(environment):
     return Response(out, content_type='application/json; charset=utf-8')
 
 
-# @elevators.route('/<environment>/<item_id>/', methods=['GET'])
-# def get_by_id(environment, item_id):
-#     dao = get_dao(environment)
-#     out = json.dumps(dao.get_by_id('elevators', item_id), sort_keys=True, indent=4, default=json_util.default)
-#     return Response(out, content_type='application/json; charset=utf-8')
-
-
-@elevators.route('/<environment>/<session>/<time>/', methods=['GET'])
+@elevators.route('/<environment>/<session>/<id>/', methods=['GET'])
 @cross_origin(origins='*', headers=['Content-Type'])
-def get_by_session_and_time(environment, session, time):
+def get_by_session_and_id(environment, session, id):
     dao = get_dao(environment)
-    out = json.dumps(dao.get_by_session_and_time('elevators', session, time), sort_keys=True, indent=4, default=json_util.default)
+    out = json.dumps(dao.get_by_session_and_id('elevators', session, id), sort_keys=True, indent=4, default=json_util.default)
     return Response(out, content_type='application/json; charset=utf-8')
-
-
-# @elevators.route('/<environment>/<item_id>/', methods=['DELETE'])
-# def delete(environment, item_id):
-#     dao = get_dao(environment)
-#     out = json.dumps(dao.delete('elevators', item_id), sort_keys=True, indent=4, default=json_util.default)
-#     return Response(out, content_type='application/json; charset=utf-8')
-
-
-# @elevators.route('/<environment>/<item_id>/', methods=['PUT'])
-# def update(environment, item_id):
-#     item = json.loads(request.data)
-#     dao = get_dao(environment)
-#     ack = dao.update('elevators', item_id, item)
-#     out = json.dumps(ack, sort_keys=True, indent=4, default=json_util.default)
-#     return Response(out, content_type='application/json; charset=utf-8')
 
 
 @elevators.route('/<environment>/', methods=['POST'])

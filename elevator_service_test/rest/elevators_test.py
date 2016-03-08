@@ -29,10 +29,10 @@ class BooksTest(unittest.TestCase):
         data = json.loads(response.data)
         self.assertEquals(len(data), 1)
 
-    def test_get_by_session_and_time(self):
+    def test_get_by_session_and_id(self):
         dao = get_dao('test')
         dao.create('elevators', elevator_1)
-        response = self.tester.get('/elevators/test/alpha/1/', content_type='application/json')
+        response = self.tester.get('/elevators/test/alpha/A/', content_type='application/json')
         self.assertEquals(response.status_code, 200)
         data = json.loads(response.data)
         self.assertEquals(len(data), 1)

@@ -52,14 +52,10 @@ class ElevatorServiceTest(unittest.TestCase):
         items = dao.get('elevators')
         self.assertEqual(len(items), 2)
 
-    def test_get_by_session_and_time(self):
+    def test_get_by_session_and_id(self):
         dao = get_dao('test')
         inserted_id = dao.create('elevators', elevator_1)
-        items = dao.get_by_session_and_time('elevators', 'alpha', 1)
-        self.assertEqual(len(items), 1)
-        self.assertEqual(items[0]['session'], 'alpha')
-        self.assertEqual(items[0]['time'], 1)
-        items = dao.get_by_session_and_time('elevators', 'alpha', "1")
+        items = dao.get_by_session_and_id('elevators', 'alpha', 'A')
         self.assertEqual(len(items), 1)
         self.assertEqual(items[0]['session'], 'alpha')
         self.assertEqual(items[0]['time'], 1)
