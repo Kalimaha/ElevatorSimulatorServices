@@ -40,13 +40,16 @@ class DAO:
         return out
 
     def create(self, collection_name, item):
-        db = self.client[self.db]
-        collection = db[collection_name]
-        print item
-        print item['id']
-        print item['session']
-        print item['time']
-        return collection.update_one({'id': item['id'], 'session': item['session'], 'time': item['time']}, {'$set': item}, upsert=True)
+        try:
+            db = self.client[self.db]
+            collection = db[collection_name]
+            print item
+            print item['id']
+            print item['session']
+            print item['time']
+            return collection.update_one({'id': item['id'], 'session': item['session'], 'time': item['time']}, {'$set': item}, upsert=True)
+        except Exception, e:
+            print e
 
     # def delete(self, collection_name, item_id):
     #     db = self.client[self.db]
