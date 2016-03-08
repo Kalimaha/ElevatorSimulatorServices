@@ -40,6 +40,10 @@ class ElevatorServiceTest(unittest.TestCase):
         dao = get_dao('test')
         inserted_id = dao.create('elevators', elevator_1)
         self.assertIsNotNone(inserted_id)
+        self.assertEqual(0, inserted_id.matched_count)
+        inserted_id = dao.create('elevators', elevator_1)
+        self.assertEqual(1, inserted_id.matched_count)
+        self.assertIsNotNone(inserted_id)
 
     def test_get(self):
         dao = get_dao('test')
