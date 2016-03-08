@@ -24,10 +24,10 @@ class DAO:
             out.append(item)
         return out
 
-    def get_by_id(self, collection_name, item_id):
-        db = self.client[self.db]
-        collection = db[collection_name]
-        return collection.find_one({'_id': ObjectId(item_id)})
+    # def get_by_id(self, collection_name, item_id):
+    #     db = self.client[self.db]
+    #     collection = db[collection_name]
+    #     return collection.find_one({'_id': ObjectId(item_id)})
 
     def get_by_session_and_time(self, collection_name, session, time):
         out = []
@@ -44,15 +44,15 @@ class DAO:
         collection = db[collection_name]
         return collection.insert_one(item).inserted_id
 
-    def delete(self, collection_name, item_id):
-        db = self.client[self.db]
-        collection = db[collection_name]
-        return collection.remove({'_id': ObjectId(item_id)})
+    # def delete(self, collection_name, item_id):
+    #     db = self.client[self.db]
+    #     collection = db[collection_name]
+    #     return collection.remove({'_id': ObjectId(item_id)})
 
-    def update(self, collection_name, item_id, item):
-        db = self.client[self.db]
-        collection = db[collection_name]
-        return collection.update({'_id': ObjectId(item_id)}, item, upsert=False)
+    # def update(self, collection_name, item_id, item):
+    #     db = self.client[self.db]
+    #     collection = db[collection_name]
+    #     return collection.update({'_id': ObjectId(item_id)}, item, upsert=False)
 
     def create_connection_uri(self):
         return 'mongodb://' + self.username + ':' + self.password + '@' + self.host + ':' + self.port + '/' + self.db

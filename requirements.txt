@@ -1,4 +1,5 @@
 bson
 flask
+flask-cors
 pymongo
 gunicorn
