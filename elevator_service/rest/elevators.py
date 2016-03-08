@@ -53,8 +53,13 @@ def get_by_session_and_time(environment, session, time):
 @elevators.route('/<environment>/', methods=['POST'])
 @cross_origin(origins='*', headers=['Content-Type'])
 def create(environment):
+    print environment
     item = json.loads(request.data)
+    print item
     dao = get_dao(environment)
+    print dao
     ack = dao.create('elevators', item)
+    print ack
     out = json.dumps(ack, sort_keys=True, indent=4, default=json_util.default)
+    print out
     return Response(out, content_type='application/json; charset=utf-8')
